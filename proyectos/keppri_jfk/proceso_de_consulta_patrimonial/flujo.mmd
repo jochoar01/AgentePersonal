@@ -1,0 +1,35 @@
+flowchart TD
+    %% Definición de Estilos
+    classDef inicio fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#155724;
+    classDef proceso fill:#cce5ff,stroke:#004085,stroke-width:2px,color:#004085;
+    classDef decisiones fill:#fff3cd,stroke:#856404,stroke-width:2px,color:#856404;
+    classDef fin fill:#e2e3e5,stroke:#383d41,stroke-width:2px,color:#383d41;
+
+    subgraph Fase1 [1. Inicialización y Entrada]
+        A[Inicio: Plantilla Base Estandarizada] --> B[Cargar 300-400 Clientes en DataTable]
+        B --> C[For Each Cliente]
+    end
+
+    subgraph Fase2 [2. Bloque de Consultas - Fuentes Oficiales]
+        C --> D1[1. Registraduría: Vigencia / Fallecido]
+        D1 --> D2[2. ADRES: Empleo / Inactivo]
+        D2 --> D3[3. RUES: Establecimientos]
+        D3 --> D4[4. Supernotariado: Inmuebles - Credential Pooling]
+        D4 --> D5[5. SIMIT: Multas]
+        D5 --> D6[6. RUNT: Validación por Placa]
+    end
+
+    subgraph Fase3 [3. Consolidación y Salida]
+        D6 --> E[Consolidar Resultados en Matriz]
+        E --> F{¿Fin de Lote?}
+        F -->|No| C
+        F -->|Sí| G[Escritura Única Archivo Final]
+        G --> H[Entrega: Abogados y Cobranza]
+        H --> I[Fin del Proceso]
+    end
+
+    %% Aplicación de Clases
+    class A,B inicio;
+    class C,D1,D2,D3,D4,D5,D6,E,G proceso;
+    class F decisiones;
+    class H,I fin;
